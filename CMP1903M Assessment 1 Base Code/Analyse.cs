@@ -29,6 +29,57 @@ namespace CMP1903M_Assessment_1_Base_Code
                 values.Add(0);
             }
 
+            IDictionary<char, int> chars = new Dictionary<char, int>();
+            char[] vowels = {'a', 'e', 'i', 'o', 'u'};
+            bool debug = false;
+
+            foreach (char c in input)
+            {
+                if (c == '*') // prioritize ending on an asterisk
+                {
+                    if (debug) Console.WriteLine("Stop right there!");
+                    break;
+                }
+
+                if (c == '.') // sentences
+                {
+                    if (debug) Console.WriteLine("Sentence counted.");
+                    values[0]++;
+                    continue;
+                }
+
+                if (!Char.IsLetter(c)) // rule out any symbols or spaces
+                {
+                    if (debug) Console.WriteLine(c + " is not a letter.");
+                    continue; 
+                }
+
+                chars.TryGetValue(c, out int val);
+                chars[c] = val + 1;
+
+                int vindex = Array.IndexOf(vowels, Char.ToLower(c)); // figure out if c is in vowels array
+                if (vindex > -1) // vowels
+                {
+                    if (debug) Console.WriteLine(c + " is a vowel.");
+                    values[1]++;
+                }
+                else // consonants
+                {
+                    if (debug) Console.WriteLine(c + " is a consonant.");
+                    values[2]++;
+                }
+
+                if (Char.IsUpper(c)) // uppercase
+                {
+                    if (debug) Console.WriteLine(c + " is upper case.");
+                    values[3]++;
+                }
+                else // lowercase
+                {
+                    if (debug) Console.WriteLine(c + " is lower case.");
+                    values[4]++;
+                }
+            }
 
             return values;
         }
