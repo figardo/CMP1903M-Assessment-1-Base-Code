@@ -34,5 +34,22 @@ namespace CMP1903M_Assessment_1_Base_Code
 
             await File.WriteAllLinesAsync("output.txt", lines);
         }
+
+        public void longWords(string sentences)
+        {
+            string[] temp = sentences.Split('*'); // get the part that matters
+            string[] words = temp[0].Split(' '); // split it into words
+            List<string> longwords = new List<string>();
+            
+            foreach (string word in words)
+            {
+                if (word.Length > 7)
+                {
+                    longwords.Add(word);
+                }
+            }
+            string[] final = longwords.ToArray(); // line below wants an array so an array it'll get
+            File.WriteAllLines("long_words.txt", final);
+        }
     }
 }
