@@ -11,29 +11,31 @@ namespace CMP1903M_Assessment_1_Base_Code
     {
         static void Main()
         {
-            //Local list of integers to hold the first five measurements of the text
+            // Local list of integers to hold the first five measurements of the text
             List<int> parameters = new List<int>();
 
-            //Create 'Input' object
-            //Get either manually entered text, or text from a file
+            // Create 'Input' object
+            // Get either manually entered text, or text from a file
+            Input input = new Input();
+            int option = input.chooseOption();
+            string sentences = input.getSentences(option);
 
+            // Create an 'Analyse' object
+            Analyse analyse = new Analyse();
 
-            //Create an 'Analyse' object
-            //Pass the text input to the 'analyseText' method
+            // Pass the text input to the 'analyseText' method
+            // Receive a list of integers back
+            parameters = analyse.analyseText(sentences);
 
+            // Report the results of the analysis
+            Report report = new Report();
+            report.outputConsole(parameters);
+            report.outputFile(parameters);
+            report.longWords(sentences); // write a file containing words with >7 chars
 
-            //Receive a list of integers back
+            // TO ADD: Get the frequency of individual letters?
+            // eh
 
-
-            //Report the results of the analysis
-
-
-            //TO ADD: Get the frequency of individual letters?
-
-           
-        }
-        
-        
-    
+        } 
     }
 }
